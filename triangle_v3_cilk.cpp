@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <chrono>
+#include <cmath>
 #include <cilk/cilk.h>
-#include <cilk/cilk_api.h>
 
 extern "C" {
 #include "mmio.h"
@@ -102,6 +102,7 @@ int main(int argc, char **argv) {
 
 
         int total{};
+        #pragma simd
         cilk_for(int r = 1; r < N; ++r) {
             for (int j = 0; j < csrColumn[r + 1] - csrColumn[r]; ++j) {
                 int row1 = csrRow[csrColumn[r] + j];
