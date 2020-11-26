@@ -67,7 +67,7 @@ cmake-build-debug/
 
 #IDEs
 .idea
-vscode/
+.vscode/
 
 # Compiled Object files
 *.slo
@@ -79,3 +79,8 @@ vscode/
 # Compiled Static libraries
 *.lai
 
+# Executables
+vertexwise_triangle_counting*
+triangle_v3_serial
+triangle_v3_cilk
+triangle_v3_openmp
