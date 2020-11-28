@@ -12,6 +12,7 @@ option(ENABLE_OPENMP "Enable OpenMP support?" OFF)
 
 add_library(coo2csc OBJECT coo2csc.c coo2csc.h)
 add_library(mmio OBJECT mmio.h mmio.c)
+add_library(graph OBJECT Graph.cpp Graph.hpp)
 
 find_package(PkgConfig)
 
@@ -33,6 +34,8 @@ if (ENABLE_OPENMP)
     endif ()
 endif ()
 
-add_compile_options(-O3)
+add_compile_options(-g)
 add_executable(triangle_v3_serial triangle_v3_serial.cpp)
 target_link_libraries(triangle_v3_serial PUBLIC mmio coo2csc)
+add_executable(triangle_v4_serial triangle_v4_serial.cpp)
+target_link_libraries(triangle_v4_serial PUBLIC mmio coo2csc graph)
