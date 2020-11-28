@@ -12,6 +12,7 @@ K3 graphs.
 2. Make
 3. g++
 4. OpenCilk
+5. Python (3.6 or higher)
 
 
 ### Instructions
@@ -48,3 +49,15 @@ K3 graphs.
     ```
     where valid variants are `cilk`, `openmp`, `serial`.
     By default, only the serial is built
+5.  To run the formula validation first install numpy using
+    ```shell script
+    $ pip3 install numpy
+    ```
+    or install it from the requirements.txt file running
+    ```shell script
+    $ pip3 install -r requirements.txt
+    ```
+    and run the python script by executing the following command
+    ```shell script
+    $ python3 ./formula-validation/validate.py
+    ```
