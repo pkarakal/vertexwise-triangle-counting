@@ -34,3 +34,9 @@ add_custom_target(triangle_v3_cilk ALL
         COMMAND gcc -c coo2csc.c coo2csc.h -O3
         COMMAND /usr/local/OpenCilk-9.0.1-Linux/bin/clang++ triangle_v3_cilk.cpp mmio.o coo2csc.o
         -o triangle_v3_cilk -fopencilk -O3)
+
+add_custom_target(triangle_v4_cilk ALL
+        COMMAND gcc -c mmio.c mmio.h -O3
+        COMMAND gcc -c coo2csc.c coo2csc.h -O3
+        COMMAND /usr/local/OpenCilk-9.0.1-Linux/bin/clang++ triangle_v4_cilk.cpp mmio.o coo2csc.o
+        -o triangle_v4_cilk -fopencilk -O3)
