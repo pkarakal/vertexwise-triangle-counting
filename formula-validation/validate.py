@@ -30,4 +30,4 @@ c3 = arr / 2
 print(c3.transpose())
 print(c3_loop.transpose())
 
-assert_array_equal(c3_loop, c3_loop)
+assert_array_equal(c3, c3_loop)
