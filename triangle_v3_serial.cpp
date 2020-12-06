@@ -100,11 +100,11 @@ int main(int argc, char **argv) {
 
         int total{};
         for (int r = 1; r < N; ++r) {
-            for (int j = 0; j < csrColumn[r + 1] - csrColumn[r]; ++j) {
-                int row1 = csrRow[csrColumn[r] + j];
+            for (int j = csrColumn[r]; j < csrColumn[r + 1]; ++j) {
+                int row1 = csrRow[j];
                 int col1 = r;
-                for (int k = 0; k < csrColumn[row1 + 1] - csrColumn[row1]; ++k) {
-                    int row3 = csrRow[csrColumn[row1] + k];
+                for (int k = csrColumn[row1]; k < csrColumn[row1 + 1]; ++k) {
+                    int row3 = csrRow[k];
                     int col3 = row1;
                     int max, min;
                     if (row3 > col1) {
@@ -114,8 +114,8 @@ int main(int argc, char **argv) {
                         max = col1;
                         min = row3;
                     }
-                    for (int l = 0; l < csrColumn[max + 1] - csrColumn[max]; ++l) {
-                        int row2 = csrRow[csrColumn[max] + l];
+                    for (int l = csrColumn[max]; l < csrColumn[max + 1]; ++l) {
+                        int row2 = csrRow[l];
                         if (row2 == min) {
                             total++;
                             ++c3[min];

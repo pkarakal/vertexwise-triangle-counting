@@ -84,3 +84,7 @@ vertexwise_triangle_counting*
 triangle_v3_serial
 triangle_v3_cilk
 triangle_v3_openmp
+triangle_v4_serial
+triangle_v4_openmp
+triangle_v4_cilk
+triangle_v4_pthreads

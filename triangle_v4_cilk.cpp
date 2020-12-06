@@ -109,19 +109,16 @@ int main(int argc, char** argv){
 
     #pragma simd
     cilk_for(int i = 0; i < N; i++) {
-        cilk_for(int j = 0; j < cscColumn.at(i+1) - cscColumn.at(i); j++) {
-            int a_row = cscRow.at(cscColumn.at(i) + j);
-            int a_col = i;
-
-            std::vector<uint32_t> k = std::vector<uint32_t>(cscColumn.at(a_row+1) - cscColumn.at(a_row));
-            std::vector<uint32_t> l = std::vector<uint32_t>(cscColumn.at(a_col+1) - cscColumn.at(a_col));
+        cilk_for(int j = cscColumn.at(i); j < cscColumn.at(i+1); j++) {
+            std::vector<uint32_t> k = std::vector<uint32_t>(cscColumn.at(cscRow.at(j)+1) - cscColumn.at(cscRow.at(j)));
+            std::vector<uint32_t> l = std::vector<uint32_t>(cscColumn.at(i+1) - cscColumn.at(i));
 
             int s;
             for(s = 0; s < k.size(); ++s) {
-                k[s] = cscRow.at(cscColumn.at(a_row) + s);
+                k[s] = cscRow.at(cscColumn.at(cscRow.at(j)) + s);
             }
             for(s = 0; s < l.size(); ++s) {
-                l[s] = cscRow.at(cscColumn.at(a_col) + s);
+                l[s] = cscRow.at(cscColumn.at(i) + s);
             }
 
             int m = 0;
@@ -141,17 +138,15 @@ int main(int argc, char** argv){
             }
 
             if(mul_value) {
-                c_values.at(cscColumn.at(i) + j) = mul_value;
+                c_values.at(j) = mul_value;
             }
         }
     }
 
     for(i = 0; i < N; i++) {
-        for(int j = 0; j < cscColumn.at(i+1) - cscColumn.at(i); j++) {
-            int row = cscRow.at(cscColumn.at(i) + j);
-            int col = i;
-            int value = c_values.at(cscColumn.at(i) + j);
-            result_vector.at(row) += value * ones.at(col);
+        for(int j = cscColumn.at(i); j < cscColumn.at(i+1); j++) {
+            int value = c_values.at(j);
+            result_vector.at(cscRow.at(j)) += value * ones.at(i);
         }
     }
 
