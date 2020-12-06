@@ -9,6 +9,7 @@ endif ()
 option(ENABLE_CLANGTIDY "Enable clang-tidy support?" OFF)
 option(ENABLE_OPENCILK "Enable OpenCilk support?" OFF)
 option(ENABLE_OPENMP "Enable OpenMP support?" OFF)
+option(ENABLE_PTHREADS "Enable OpenMP support?" OFF)
 
 add_library(coo2csc OBJECT coo2csc.c coo2csc.h)
 add_library(mmio OBJECT mmio.h mmio.c)

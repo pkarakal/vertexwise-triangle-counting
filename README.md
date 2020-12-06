@@ -39,15 +39,20 @@ K3 graphs.
     ```
     $ cmake -S . -DENABLE_OPENMP=ON
     ```
+    To enable the build of the executable that leverages PThreads run
+    ```shell script
+    $ cmake -S . -DENABLE_PTHREADS=ON
+    ```
     To enable Clang Tidy support use the following flag
     ```shell script
     $ cmake -S . -DENABLE_CLANGTIDY=ON
     ```
 4.  Build and run the application
     ```shell script
-    $ cmake --build . && ./triangle_v3_{variant}
+    $ cmake --build . && ./triangle_v{version}_{variant}
     ```
-    where valid variants are `cilk`, `openmp`, `serial`.
+    where valid variants are `cilk`, `openmp`, `serial`, `pthreads`,
+    and valid versions are 3 and 4.
     By default, only the serial is built
 5.  To run the formula validation first install numpy using
     ```shell script
