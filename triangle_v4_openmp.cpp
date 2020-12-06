@@ -35,6 +35,12 @@ int main(int argc, char** argv){
         exit(1);
     }
 
+    int threads{};
+    if(argc == 3){
+        threads= atoi(argv[2]);
+    } else {
+        threads = 4;
+    }
 
     /*  This is how one can screen matrix types if their application */
     /*  only supports a subset of the Matrix Market data types.      */
@@ -101,14 +107,15 @@ int main(int argc, char** argv){
     }
 
     std::vector<int>c3 = std::vector<int>(0);
-    std::vector<int>ones = std::vector(N, 1);
-    std::vector<int>result_vector = std::vector(N, 0);
+    std::vector<int>ones = std::vector<int>(N, 1);
+    std::vector<int>result_vector = std::vector<int>(N, 0);
     c_values = std::vector<uint32_t>(2*nnz);
 
     auto start = std::chrono::high_resolution_clock::now();
 
+    std::vector<uint32_t> l;
     omp_set_dynamic(0);     // Explicitly disable dynamic teams
-    omp_set_num_threads(num_of_threads); // Use num_of_threads threads for all consecutive parallel regions
+    omp_set_num_threads(threads); // Use num_of_threads threads for all consecutive parallel regions
 
     #pragma omp parallel for private(l)
     for(i = 0; i < N; i++) {
@@ -117,7 +124,7 @@ int main(int argc, char** argv){
             int a_col = i;
 
             std::vector<uint32_t> k = std::vector<uint32_t>(cscColumn.at(a_row+1) - cscColumn.at(a_row));
-            std::vector<uint32_t> l = std::vector<uint32_t>(cscColumn.at(a_col+1) - cscColumn.at(a_col));
+            l = std::vector<uint32_t>(cscColumn.at(a_col+1) - cscColumn.at(a_col));
 
             int s;
             for(s = 0; s < k.size(); ++s) {
@@ -144,6 +151,7 @@ int main(int argc, char** argv){
             }
 
             if(mul_value) {
+                #pragma omp critical
                 c_values.at(cscColumn.at(i) + j) = mul_value;
             }
         }
@@ -154,6 +162,7 @@ int main(int argc, char** argv){
             int row = cscRow.at(cscColumn.at(i) + j);
             int col = i;
             int value = c_values.at(cscColumn.at(i) + j);
+            #pragma omp critical
             result_vector.at(row) += value * ones.at(col);
         }
     }
