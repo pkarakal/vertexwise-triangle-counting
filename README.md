@@ -14,6 +14,26 @@ K3 graphs.
 4. OpenCilk
 5. Python (3.6 or higher)
 
+To install them on variant Linux distributions follow the instructions below
+
+#### Fedora
+```shell
+$ sudo dnf upgrade --refresh # updates installed packages and repositories metadata
+$ sudo dnf install cmake make gcc-c++ python 
+# downloads the OpenCilk tarball from Github and moves it to /usr/local/ 
+$ wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fbeta3/OpenCilk-9.0.1-Linux.tar.gz && \
+ tar xvzf OpenCilk-9.0.1-Linux.tar.gz && mv OpenCilk-9.0.1-Linux/ /usr/local/ && chmod og+xr /usr/local/OpenCilk-9.0.1-Linux/
+```
+
+#### Ubuntu 
+```shell
+$ sudo apt-get update && sudo apt-get upgrade # updates installed packages and repositories metadata
+$ sudo apt-get install cmake make g++ python3 # ubuntu still offers python2 in its repositories
+# downloads the OpenCilk tarball from Github and moves it to /usr/local/ 
+$ wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fbeta3/OpenCilk-9.0.1-Linux.tar.gz && \
+ tar xvzf OpenCilk-9.0.1-Linux.tar.gz && mv OpenCilk-9.0.1-Linux/ /usr/local/ && chmod og+xr /usr/local/OpenCilk-9.0.1-Linux/
+```
+
 
 ### Instructions
 1.  Clone the repository
