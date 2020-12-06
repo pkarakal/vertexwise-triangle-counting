@@ -144,11 +144,9 @@ int main(int argc, char** argv){
     }
 
     for(i = 0; i < N; i++) {
-        for(int j = 0; j < cscColumn.at(i+1) - cscColumn.at(i); j++) {
-            int row = cscRow.at(cscColumn.at(i) + j);
-            int col = i;
-            int value = c_values.at(cscColumn.at(i) + j);
-            result_vector.at(row) += value * ones.at(col);
+        for(int j = cscColumn.at(i); j < cscColumn.at(i+1); j++) {
+            int value = c_values.at(j);
+            result_vector.at(cscRow.at(j)) += value * ones.at(i);
         }
     }
 

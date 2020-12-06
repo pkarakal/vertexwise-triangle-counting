@@ -2,39 +2,36 @@
 
 void *Graph::adjMatMul() {
     for (int i = this->start; i < this->end; ++i) {
-        for (int j = 0; j < this->cscColumn.at(i + 1) - this->cscColumn.at(i); ++j) {
-            int a_row = this->cscRow.at(cscColumn.at(i) + j);
-            int a_col = i;
-
-            std::vector<uint32_t> k = std::vector<uint32_t>(this->cscColumn.at(a_row + 1) - this->cscColumn.at(a_row));
-            std::vector<uint32_t> l = std::vector<uint32_t>(this->cscColumn.at(a_col + 1) - this->cscColumn.at(a_col));
+        for(int j = this->cscColumn.at(i); j < this->cscColumn.at(i+1); j++) {
+            std::vector<uint32_t> k = std::vector<uint32_t>(this->cscColumn.at(this->cscRow.at(j)+1) - this->cscColumn.at(this->cscRow.at(j)));
+            std::vector<uint32_t> l = std::vector<uint32_t>(this->cscColumn.at(i+1) - this->cscColumn.at(i));
 
             int s;
-            for (s = 0; s < k.size(); ++s) {
-                k[s] = this->cscRow.at(this->cscColumn.at(a_row) + s);
+            for(s = 0; s < k.size(); ++s) {
+                k[s] = this->cscRow.at(this->cscColumn.at(this->cscRow.at(j)) + s);
             }
-            for (s = 0; s < l.size(); ++s) {
-                l[s] = this->cscRow.at(this->cscColumn.at(a_col) + s);
+            for(s = 0; s < l.size(); ++s) {
+                l[s] = this->cscRow.at(this->cscColumn.at(i) + s);
             }
 
             int m = 0;
             int n = 0;
             int mul_value = 0;
 
-            while (m != k.size() && n != l.size()) {
-                if (k[m] == l[n]) {
+            while(m != k.size() && n != l.size()) {
+                if(k[m] == l[n]) {
                     ++mul_value;
                     ++m;
                     ++n;
-                } else if (k[m] > l[n]) {
+                } else if(k[m] > l[n]) {
                     ++n;
-                } else {
+                } else{
                     ++m;
                 }
             }
 
-            if (mul_value) {
-                c_values.at(this->cscColumn.at(i) + j) = mul_value;
+            if(mul_value) {
+                c_values.at(j) = mul_value;
             }
         }
     }
