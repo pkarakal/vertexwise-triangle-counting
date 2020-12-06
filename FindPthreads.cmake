@@ -1,17 +1,8 @@
 #.rst:
 # FindPthreads
 # --------
-# Finds the Pthreads library
+# Finds the Pthreads library and adds new target
 #
-# This will define the following variables::
-#
-# OPEN_CILK_FOUND - system has OPEN_CILK
-# OPEN_CILK_INCLUDE_DIRS - the OPEN_CILK include directories
-# OPEN_CILK_LIBRARIES - the OPEN_CILK libraries
-
-#find_library(OPEN_CILK_LIBRARY NAMES libopencilk cilks
-#        PATHS /usr/local/OpenCilk-9.0.1-Linux/lib/clang/9.0.1/lib/x86_64-unknown-linux-gnu)
-
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)

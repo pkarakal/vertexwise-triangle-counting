@@ -133,7 +133,6 @@ int main(int argc, char** argv){
         graphs[i] = Graph(cscRow, cscColumn, c_values, i*chunk, (i+1)*chunk, nnz, i);
         pthread_create(&pthreads[i], NULL, Graph::statAdjMatMul, &graphs[i]);
     }
-    // The last thread is left out so as to calculate the mod of the chunk division!
 
     graphs[threads -1] = Graph(cscRow,cscColumn, c_values, (threads-1)*chunk, (threads)*chunk + (N%threads), nnz, threads -1 );
 
@@ -158,10 +157,6 @@ int main(int argc, char** argv){
 
     std::chrono::duration<double> elapsed = stop - start;
     std::cout<<"Took "<< elapsed.count() <<std::endl;
-
-//    for(int item: c3){
-//        std::cout<< item << " ";
-//    }
     std::cout<<std::endl;
 
     return 0;

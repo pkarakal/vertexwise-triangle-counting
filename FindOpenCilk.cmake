@@ -5,7 +5,6 @@
 #
 # This will define the following variables::
 #
-# OPEN_CILK_FOUND - system has OPEN_CILK
 # OPEN_CILK_INCLUDE_DIRS - the OPEN_CILK include directories
 # OPEN_CILK_LIBRARIES - the OPEN_CILK libraries
 
