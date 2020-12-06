@@ -141,13 +141,15 @@ int main(int argc, char **argv) {
         std::chrono::duration<double> elapsed = stop - start;
         std::cout<<"Took "<< elapsed.count() <<std::endl;
 
-//        for (int col = 0; col < N; ++col) {
-//            std::cout << c3[col] << std::endl;
-//        }
+        for (int col = 0; col < N; ++col) {
+            std::cout << c3[col] << std::endl;
+        }
     } catch (std::exception &e) {
         std::cout << "Error" << std::endl;
         std::cerr << e.what() << std::endl;
     }
+    free(csrColumn);
+    free(csrRow);
     free(val);
     free(I);
     free(J);
